@@ -122,8 +122,14 @@ $(function () {
 
     //function to validate the user input
     function validateInput(message) {
-
-        if (message === "" || isNaN(message) || message < 1) {
+        var maxInput = 0;
+        if (categoryFlag) {
+            maxInput = CATEGORIES.length;
+        }
+        else if (questionsFlag) {
+            maxInput = questionCount;
+        }
+        if (message === "" || isNaN(message) || message < 1 || message > maxInput) {
             writeErrorMessage("Please enter correct number");
             $("#user-input").val("");
             return false;
